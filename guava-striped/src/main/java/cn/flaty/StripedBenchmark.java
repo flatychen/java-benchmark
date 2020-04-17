@@ -17,9 +17,9 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @BenchmarkMode({Mode.Throughput})
 @OutputTimeUnit(TimeUnit.SECONDS)
-@Threads(2)
-//@Fork(3)
-//@Warmup(iterations = 1)
+@Threads(8)
+@Fork(3)
+@Warmup(iterations = 1)
 @Measurement(iterations = 2)
 @State(Scope.Benchmark)
 public class StripedBenchmark {
@@ -27,7 +27,7 @@ public class StripedBenchmark {
 
     private static Striped<Lock> lockStriped = Striped.lock(1024);
 
-    private Lock lock = new ReentrantLock();
+    private static Lock lock = new ReentrantLock();
 
     @Benchmark
     public void lock() throws InterruptedException {
